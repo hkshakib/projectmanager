@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,7 +14,6 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
-const pages = ["SignUp", "Login", "New Project"];
 const settings = ["Logout"];
 
 const Navbar = () => {
@@ -53,7 +54,7 @@ const Navbar = () => {
               textDecoration: "none",
             }}
           >
-            Project Manager
+            <NavLink to="/">Project Manager</NavLink>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -86,11 +87,33 @@ const Navbar = () => {
                 color: "black",
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography
+                  sx={{ display: "flex", flexDirection: "column", gap: 1 }}
+                >
+                  <Button
+                    href="/signup"
+                    variant="outlined"
+                    sx={{ color: "black" }}
+                  >
+                    Signup
+                  </Button>
+                  <Button
+                    href="/signin"
+                    variant="outlined"
+                    sx={{ color: "black" }}
+                  >
+                    Signin
+                  </Button>
+                  <Button
+                    href="/create"
+                    variant="outlined"
+                    sx={{ color: "black" }}
+                  >
+                    Create Project
+                  </Button>
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
 
@@ -122,15 +145,19 @@ const Navbar = () => {
               color: { md: "grey" },
             }}
           >
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "black", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "black", display: "block" }}
+            />
+            <Button href="/signup" variant="outlined" sx={{ color: "black" }}>
+              Signup
+            </Button>
+            <Button href="/signin" variant="outlined" sx={{ color: "black" }}>
+              Signin
+            </Button>
+            <Button href="/create" variant="outlined" sx={{ color: "black" }}>
+              Create Project
+            </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -139,6 +166,7 @@ const Navbar = () => {
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
               </IconButton>
             </Tooltip>
+
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
