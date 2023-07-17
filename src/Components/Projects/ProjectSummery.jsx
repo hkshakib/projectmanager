@@ -49,7 +49,7 @@ const ProjectSummery = () => {
     >
       <Card variant="outlined">{card}</Card>
     </Box>
-  )
-}
+  );
+};
 
 export default ProjectSummery;
