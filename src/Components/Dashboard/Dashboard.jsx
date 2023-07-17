@@ -4,6 +4,10 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
+import Notifications from "./Notifications";
+
+import ProjectList from "../Projects/ProjectList";
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -12,23 +16,25 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
   marginTop: "40px",
   height: "85vh",
-  border: "black",
+  display: "flex",
+  flexDirection: "column",
 }));
 
 const Dashboard = () => {
   return (
-    <Box sx={{ flexGrow: 1, }}>
-
+    <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-        
         <Grid item md={8} xs={12}>
-          <Item>DashBoard</Item>
+          <Item >
+            <ProjectList />
+          </Item>
         </Grid>
 
         <Grid item md={4} xs={12}>
-          <Item>Notification</Item>
+          <Item sx={{ border: 1 }}>
+            <Notifications />
+          </Item>
         </Grid>
-
       </Grid>
     </Box>
   );
