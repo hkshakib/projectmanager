@@ -5,7 +5,6 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
 import Notifications from "./Notifications";
-
 import ProjectList from "../Projects/ProjectList";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -25,7 +24,7 @@ const Dashboard = () => {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid item md={8} xs={12}>
-          <Item >
+          <Item>
             <ProjectList />
           </Item>
         </Grid>

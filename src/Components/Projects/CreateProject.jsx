@@ -4,15 +4,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
+// import { useDispatch } from "react-redux";
+
+// import create from "../../Store/Reducers/ProjectReducer";
+
 const CreateProject = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  // const dispatch = useDispatch();
 
   return (
     <Container component="main" maxWidth="xs">
@@ -27,7 +24,12 @@ const CreateProject = () => {
         <Typography component="h1" variant="h5">
           Create New Project
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box
+          component="form"
+          // onSubmit={dispatch(create())}
+          noValidate
+          sx={{ mt: 1 }}
+        >
           <TextField
             margin="normal"
             required
