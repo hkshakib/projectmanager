@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import ProjectSlice from "./Reducers/ProjectReducer";
+import ProjectReducer from "./Reducers/ProjectReducer";
 import AuthReducer from "./Reducers/AuthReducer";
 
 const Store = configureStore({
   reducer: {
-    projects: ProjectSlice,
+    projects: ProjectReducer,
     auth: AuthReducer,
   },
 });

@@ -47,15 +47,10 @@ const SignUp = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    setEmail(data.get("email").trim());
-    setPassword(data.get("password"));
-    setFirstName(data.get("firstName"));
-    setLastName(data.get("lastName"));
-    handleAuth();
+    handleSignUp();
   };
 
-  const handleAuth = () => {
+  const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -117,6 +112,7 @@ const SignUp = () => {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -127,6 +123,7 @@ const SignUp = () => {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -137,6 +134,7 @@ const SignUp = () => {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -148,6 +146,7 @@ const SignUp = () => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
