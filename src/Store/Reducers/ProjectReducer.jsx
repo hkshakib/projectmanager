@@ -15,6 +15,7 @@ const ProjectSlice = createSlice({
     create: (state, action) => {
       state.push(action.payload);
     },
+    remove: (state, action) => {},
   },
 });
 

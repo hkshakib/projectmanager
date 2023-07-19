@@ -10,7 +10,7 @@ const ProjectList = () => {
   return (
     <Box>
       {data.map((da) => {
-        return <ProjectSummery value={da} />;
+        return <ProjectSummery value={da} key={da.id} />;
       })}
     </Box>
   );

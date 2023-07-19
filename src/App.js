@@ -6,8 +6,11 @@ import ProjectDetails from "./Components/Projects/Projectdetails";
 import SignIn from "./Components/Auth/SignIn";
 import SignUp from "./Components/Auth/SignUp";
 import CreateProject from "./Components/Projects/CreateProject";
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "./Config/FbConfig";
 
 const App = () => {
+  initializeApp(firebaseConfig);
   return (
     <BrowserRouter>
       <Navbar/>

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,6 +12,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 function Copyright(props) {
   return (
@@ -34,14 +37,51 @@ function Copyright(props) {
 const theme = createTheme();
 
 const SignUp = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const auth = getAuth();
+  const firestore = getFirestore();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    setEmail(data.get("email").trim());
+    setPassword(data.get("password"));
+    setFirstName(data.get("firstName"));
+    setLastName(data.get("lastName"));
+    handleAuth();
   };
+
+  const handleAuth = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log("Registered user: ", user);
+        const userDocRef = doc(firestore, "users", user.uid);
+        setDoc(userDocRef, {
+          email: user.email,
+          firstName: firstName,
+          lastName: lastName,
+        })
+          .then(() => {
+            console.log("User's first and last names stored in Firestore!");
+          })
+          .catch((error) => {
+            console.log("Error storing user's first and last names: ", error);
+          });
+        setEmail("");
+        setPassword("");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("Error ocured: ", errorCode, errorMessage);
+      });
+  };
+  // console.log({email: email, password:password, firstName: firstName, lastName:lastName});
 
   return (
     <ThemeProvider theme={theme}>
