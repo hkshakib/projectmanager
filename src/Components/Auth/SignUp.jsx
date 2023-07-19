@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -41,6 +42,7 @@ const SignUp = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const auth = getAuth();
   const firestore = getFirestore();
@@ -69,6 +71,7 @@ const SignUp = () => {
           });
         setEmail("");
         setPassword("");
+        navigate("/signin");
       })
       .catch((error) => {
         const errorCode = error.code;

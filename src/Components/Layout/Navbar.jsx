@@ -9,14 +9,19 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
+// import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { getAuth, signOut } from "firebase/auth";
+import { useSelector } from "react-redux";
 
 const settings = ["Logout"];
 
 const Navbar = () => {
+  const user = useSelector((state) => state.auth.value);
+  console.log(user);
+  const auth = getAuth();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -91,20 +96,41 @@ const Navbar = () => {
                 <Typography
                   sx={{ display: "flex", flexDirection: "column", gap: 1 }}
                 >
-                  <Button
-                    href="/signup"
-                    variant="outlined"
-                    sx={{ color: "black" }}
-                  >
-                    Signup
-                  </Button>
-                  <Button
-                    href="/signin"
-                    variant="outlined"
-                    sx={{ color: "black" }}
-                  >
-                    Signin
-                  </Button>
+                  {!user && (
+                    <>
+                      <Button
+                        href="/signup"
+                        variant="outlined"
+                        sx={{ color: "black" }}
+                      >
+                        Signup
+                      </Button>
+                      <Button
+                        href="/signin"
+                        variant="outlined"
+                        sx={{ color: "black" }}
+                      >
+                        Signin
+                      </Button>
+                    </>
+                  )}
+                  {user && (
+                    <Button
+                      onClick={() => {
+                        signOut(auth)
+                          .then(() => {
+                            console.log("user signed out");
+                          })
+                          .catch((error) => {
+                            console.log("error", error);
+                          });
+                      }}
+                      variant="outlined"
+                      sx={{ color: "black" }}
+                    >
+                      logout
+                    </Button>
+                  )}
                   <Button
                     href="/create"
                     variant="outlined"
@@ -149,12 +175,41 @@ const Navbar = () => {
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "black", display: "block" }}
             />
-            <Button href="/signup" variant="outlined" sx={{ color: "black" }}>
-              Signup
-            </Button>
-            <Button href="/signin" variant="outlined" sx={{ color: "black" }}>
-              Signin
-            </Button>
+            {!user && (
+              <>
+                <Button
+                  href="/signup"
+                  variant="outlined"
+                  sx={{ color: "black" }}
+                >
+                  Signup
+                </Button>
+                <Button
+                  href="/signin"
+                  variant="outlined"
+                  sx={{ color: "black" }}
+                >
+                  Signin
+                </Button>
+              </>
+            )}
+            {user && (
+              <Button
+                onClick={() => {
+                  signOut(auth)
+                    .then(() => {
+                      console.log("user signed out");
+                    })
+                    .catch((error) => {
+                      console.log("error", error);
+                    });
+                }}
+                variant="outlined"
+                sx={{ color: "black" }}
+              >
+                logout
+              </Button>
+            )}
             <Button href="/create" variant="outlined" sx={{ color: "black" }}>
               Create Project
             </Button>
@@ -163,7 +218,11 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
+                <Typography variant="overline" display="block" gutterBottom>
+                  {user && auth.currentUser.email}
+                </Typography>
+                <Typography></Typography>
               </IconButton>
             </Tooltip>
 
