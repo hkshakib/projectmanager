@@ -22,12 +22,10 @@ export const FetchProjects = createAsyncThunk(
   "projects/fetchprojects",
   async () => {
     const querySnap = await getDocs(collection(DataBase, "projects"));
-    console.log("Yo", querySnap);
     const projects = querySnap.docs.map((doc) => ({
       id: doc.id,
       project: doc.data(),
     }));
-    console.log("Hellooo: ", projects);
     return projects;
   }
 );
@@ -46,7 +44,5 @@ const ProjectSlice = createSlice({
       });
   },
 });
-
-// export const { create } = ProjectSlice.actions;
 
 export default ProjectSlice.reducer;

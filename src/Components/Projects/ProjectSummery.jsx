@@ -7,7 +7,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 const ProjectSummery = ({ value }) => {
   const createdAt = new Date(value.project.createTime).toLocaleString();
-  console.log(value);
   return (
     <Box
       sx={{
