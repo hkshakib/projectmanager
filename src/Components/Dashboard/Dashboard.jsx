@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 
 import Notifications from "./Notifications";
 import ProjectList from "../Projects/ProjectList";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FetchProjects } from "../../Store/Reducers/ProjectReducer";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -23,14 +23,10 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Dashboard = () => {
-  const Data = useSelector((state) => state.projects.projects);
-  console.log("data from state", Data);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(FetchProjects());
-    console.log("yooooo");
   }, [dispatch]);
 
   return (

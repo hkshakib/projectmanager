@@ -5,8 +5,9 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
 const ProjectSummery = ({ value }) => {
+  const createdAt = new Date(value.project.createTime).toLocaleString();
+  console.log(value);
   return (
     <Box
       sx={{
@@ -31,7 +32,7 @@ const ProjectSummery = ({ value }) => {
             color="text.secondary"
             sx={{ mb: 1.5, display: "flex", justifyContent: "start" }}
           >
-            Posted By HkShakib
+            Posted By {value.project.email} at {createdAt}
           </Typography>
           <Typography
             variant="body2"

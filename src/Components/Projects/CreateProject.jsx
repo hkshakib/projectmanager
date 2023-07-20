@@ -4,37 +4,34 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { AddProject } from "../../Store/Reducers/ProjectReducer";
 import { getAuth } from "firebase/auth";
-
-// import create from "../../Store/Reducers/ProjectReducer";
+import { useNavigate } from "react-router-dom";
 
 const CreateProject = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.value);
-  const name = useSelector((state) => state);
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  // const [userFirstName, setUserFirstName] = useState("");
-  // const [userLastName, setUserLastName] = useState("");
 
   const Auth = getAuth();
-  console.log("name: ", name);
 
   const handleAddProject = (e) => {
     e.preventDefault();
     let project = {
-      authorFirstName: Auth.currentUser.userFirstName,
-      authorLastName: Auth.currentUser.userLastName,
+      email: Auth.currentUser.email,
       title,
       content,
+      createTime: new Date().toISOString(),
     };
+    console.log(project);
     dispatch(AddProject(project));
     setTitle("");
     setContent("");
+    navigate("/");
   };
 
   return (
@@ -93,3 +90,4 @@ const CreateProject = () => {
 };
 
 export default CreateProject;
+
