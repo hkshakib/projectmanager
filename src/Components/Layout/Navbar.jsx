@@ -20,8 +20,9 @@ const settings = ["Logout"];
 
 const Navbar = () => {
   const user = useSelector((state) => state.auth.value);
-  console.log(user);
+  // console.log(user);
   const auth = getAuth();
+  // console.log("auth: ", auth.currentUser);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 

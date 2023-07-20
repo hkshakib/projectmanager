@@ -1,24 +1,52 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { DataBase } from "../../App";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 
 const initialState = {
-  projects: [
-    { id: "1", title: "first project", content: "dummyyyyyyyyyyyyyyyyyyyyy" },
-    { id: "2", title: "second project", content: "dummyyyyyyyyyyyyyyyyyyyyy" },
-    { id: "3", title: "third project", content: "dummyyyyyyyyyyyyyyyyyyyyy" },
-  ],
+  projects: [],
 };
+
+export const AddProject = createAsyncThunk(
+  "projects/addproject",
+  async (project) => {
+    const addProjectRef = await addDoc(
+      collection(DataBase, "projects"),
+      project
+    );
+    const newProject = { id: addProjectRef.id, project };
+    return newProject;
+  }
+);
+
+export const FetchProjects = createAsyncThunk(
+  "projects/fetchprojects",
+  async () => {
+    const querySnap = await getDocs(collection(DataBase, "projects"));
+    console.log("Yo", querySnap);
+    const projects = querySnap.docs.map((doc) => ({
+      id: doc.id,
+      project: doc.data(),
+    }));
+    console.log("Hellooo: ", projects);
+    return projects;
+  }
+);
 
 const ProjectSlice = createSlice({
   name: "projects",
   initialState,
-  reducers: {
-    create: (state, action) => {
-      state.push(action.payload);
-    },
-    remove: (state, action) => {},
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(AddProject.fulfilled, (state, action) => {
+        state.projects.push(action.payload);
+      })
+      .addCase(FetchProjects.fulfilled, (state, action) => {
+        state.projects = action.payload;
+      });
   },
 });
 
-export const { create } = ProjectSlice.actions;
+// export const { create } = ProjectSlice.actions;
 
 export default ProjectSlice.reducer;

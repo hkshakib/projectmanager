@@ -25,7 +25,7 @@ const ProjectSummery = ({ value }) => {
             component="div"
             sx={{ display: "flex", justifyContent: "start" }}
           >
-            {value.title}
+            {value.project.title}
           </Typography>
           <Typography
             color="text.secondary"
@@ -37,7 +37,7 @@ const ProjectSummery = ({ value }) => {
             variant="body2"
             sx={{ display: "flex", justifyContent: "start" }}
           >
-            {value.content}
+            {value.project.content}
           </Typography>
         </CardContent>
         <CardActions>

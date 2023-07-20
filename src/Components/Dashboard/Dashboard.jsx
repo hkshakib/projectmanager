@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -6,6 +6,8 @@ import Grid from "@mui/material/Grid";
 
 import Notifications from "./Notifications";
 import ProjectList from "../Projects/ProjectList";
+import { useDispatch, useSelector } from "react-redux";
+import { FetchProjects } from "../../Store/Reducers/ProjectReducer";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -14,12 +16,23 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
   marginTop: "40px",
-  height: "85vh",
   display: "flex",
   flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
 }));
 
 const Dashboard = () => {
+  const Data = useSelector((state) => state.projects.projects);
+  console.log("data from state", Data);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(FetchProjects());
+    console.log("yooooo");
+  }, [dispatch]);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -30,7 +43,7 @@ const Dashboard = () => {
         </Grid>
 
         <Grid item md={4} xs={12}>
-          <Item sx={{ border: 1 }}>
+          <Item>
             <Notifications />
           </Item>
         </Grid>

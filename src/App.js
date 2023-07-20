@@ -9,14 +9,15 @@ import CreateProject from "./Components/Projects/CreateProject";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./Config/FbConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useSelector, useDispatch } from "react-redux";
 import { saveUser } from "./Store/Reducers/AuthReducer";
+import { getFirestore } from "firebase/firestore";
+import { useDispatch } from "react-redux";
 
+const app = initializeApp(firebaseConfig);
+export const DataBase = getFirestore(app); 
 const App = () => {
-  initializeApp(firebaseConfig);
   const auth = getAuth();
-  const user = useSelector((state) => state.auth.value);
-  console.log("user from state", user);
+
   const dispatch = useDispatch();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -27,6 +28,8 @@ const App = () => {
       }
     });
   }, [auth, dispatch]);
+
+  
 
   return (
     <BrowserRouter>

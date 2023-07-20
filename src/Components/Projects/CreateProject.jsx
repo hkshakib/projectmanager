@@ -4,12 +4,38 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-// import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { AddProject } from "../../Store/Reducers/ProjectReducer";
+import { getAuth } from "firebase/auth";
 
 // import create from "../../Store/Reducers/ProjectReducer";
 
 const CreateProject = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.value);
+  const name = useSelector((state) => state);
+
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  // const [userFirstName, setUserFirstName] = useState("");
+  // const [userLastName, setUserLastName] = useState("");
+
+  const Auth = getAuth();
+  console.log("name: ", name);
+
+  const handleAddProject = (e) => {
+    e.preventDefault();
+    let project = {
+      authorFirstName: Auth.currentUser.userFirstName,
+      authorLastName: Auth.currentUser.userLastName,
+      title,
+      content,
+    };
+    dispatch(AddProject(project));
+    setTitle("");
+    setContent("");
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -26,7 +52,7 @@ const CreateProject = () => {
         </Typography>
         <Box
           component="form"
-          // onSubmit={dispatch(create())}
+          onSubmit={handleAddProject}
           noValidate
           sx={{ mt: 1 }}
         >
@@ -39,6 +65,7 @@ const CreateProject = () => {
             name="Title"
             autoComplete="Title"
             autoFocus
+            onChange={(e) => setTitle(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -49,6 +76,7 @@ const CreateProject = () => {
             type="text"
             id="description"
             autoComplete="description"
+            onChange={(e) => setContent(e.target.value)}
           />
           <Button
             type="submit"
