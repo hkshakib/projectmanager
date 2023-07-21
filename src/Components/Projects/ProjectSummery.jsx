@@ -7,14 +7,15 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 const ProjectSummery = ({ value }) => {
   const createdAt = new Date(value.project.createTime).toLocaleString();
+
   return (
     <Box
       sx={{
-        minWidth: 275,
+        minWidth: 200,
         display: "flex",
         flexDirection: "column",
         justifyContent: "start",
-        width: 700,
+        width: 900,
         mb: 1.5,
       }}
     >

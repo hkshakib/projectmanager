@@ -1,3 +1,4 @@
+import { Box, Card, CardContent, Typography } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -21,20 +22,54 @@ const getTimeDifference = (time) => {
 const Notifications = () => {
   const data = useSelector((state) => state.projects.projects);
   const len = data.length;
-  const Project = len > 0 ? data[len - 1] : null;
+  const Projects = len > 0 ? data : null;
+  console.log({ Projects: Projects });
 
-  if (!Project || !Project.project) {
-    return <div>No Notification available</div>;
+  if (!len) {
+    return <Typography>No Notification available</Typography>;
   }
-  const TimeDifference = getTimeDifference(Project.project.createTime);
 
   return (
-    <div>
-      <div>{Project.project.title}</div>
-      <div>
-        {Project.project.email} posted {TimeDifference}
-      </div>
-    </div>
+    <>
+      <Typography variant="h3" component="span">
+        Notifications
+      </Typography>
+      {Projects &&
+        Projects.map((project) => {
+          return (
+            <Box
+              sx={{
+                minWidth: 275,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "start",
+                width: 500,
+                mb: 1.5,
+                border: "none",
+              }}
+            >
+              <Card variant="outlined">
+                <CardContent>
+                  <Typography
+                    variant="h4"
+                    component="div"
+                    sx={{ display: "flex", justifyContent: "start" }}
+                  >
+                    {project.project.title}
+                  </Typography>
+                  <Typography
+                    color="text.secondary"
+                    sx={{ mb: 1.5, display: "flex", justifyContent: "start" }}
+                  >
+                    Posted By {project.project.email} at{" "}
+                    {getTimeDifference(project.project.createTime)}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Box>
+          );
+        })}
+    </>
   );
 };
 
