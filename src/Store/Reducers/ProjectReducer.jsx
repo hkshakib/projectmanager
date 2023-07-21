@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   projects: [],
+  deletedprojects: [],
 };
 
 export const AddProject = createAsyncThunk(
@@ -49,6 +50,19 @@ export const DeleteProject = createAsyncThunk(
   }
 );
 
+// Create A ReCycle Bin of Projects for uptodate into Notifications
+export const DeletedProject = createAsyncThunk(
+  "projects/deletedprojects",
+  async (project) => {
+    const addProjectRef = await addDoc(
+      collection(DataBase, "deletedprojects"),
+      project
+    );
+    const newProject = { id: addProjectRef.id, project };
+    return newProject;
+  }
+);
+
 const ProjectSlice = createSlice({
   name: "projects",
   initialState,
@@ -65,6 +79,9 @@ const ProjectSlice = createSlice({
         state.projects = state.projects.filter(
           (project) => project.id !== action.payload
         );
+      })
+      .addCase(DeletedProject.fulfilled, (state, action) => {
+        state.deletedprojects.push(action.payload);
       });
   },
 });

@@ -6,15 +6,23 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useDispatch } from "react-redux";
-import { DeleteProject } from "../../Store/Reducers/ProjectReducer";
+import {
+  DeleteProject,
+  DeletedProject,
+} from "../../Store/Reducers/ProjectReducer";
 const ProjectSummery = ({ value, id }) => {
   const createdAt = new Date(value.project.createTime).toLocaleString();
   console.log(id);
 
   const dispatch = useDispatch();
   const handleDelete = (id) => {
+    let project = {
+      ...value,
+      deletedTime: new Date().toISOString(),
+    };
     dispatch(DeleteProject(id));
     console.log("Projects Deleted!", id);
+    dispatch(DeletedProject(project));
   };
 
   return (
@@ -52,7 +60,7 @@ const ProjectSummery = ({ value, id }) => {
         </CardContent>
         <CardActions>
           <Button size="small">More</Button>
-          <Button size="small" color="error" onClick={() => handleDelete(id)} >
+          <Button size="small" color="error" onClick={() => handleDelete(id)}>
             Delete
           </Button>
         </CardActions>
