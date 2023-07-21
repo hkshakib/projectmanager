@@ -1,6 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { DataBase } from "../../App";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+} from "firebase/firestore";
 
 const initialState = {
   projects: [],
@@ -30,6 +36,19 @@ export const FetchProjects = createAsyncThunk(
   }
 );
 
+export const DeleteProject = createAsyncThunk(
+  "projects/deleteProject",
+  async (id) => {
+    const projects = await getDocs(collection(DataBase, "projects"));
+    for (let project of projects.docs) {
+      if (project.id === id) {
+        await deleteDoc(doc(DataBase, "projects", project.id));
+      }
+    }
+    return id;
+  }
+);
+
 const ProjectSlice = createSlice({
   name: "projects",
   initialState,
@@ -41,6 +60,11 @@ const ProjectSlice = createSlice({
       })
       .addCase(FetchProjects.fulfilled, (state, action) => {
         state.projects = action.payload;
+      })
+      .addCase(DeleteProject.fulfilled, (state, action) => {
+        state.projects = state.projects.filter(
+          (project) => project.id !== action.payload
+        );
       });
   },
 });

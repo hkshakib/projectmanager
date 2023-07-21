@@ -47,6 +47,7 @@ const Notifications = () => {
                 mb: 1.5,
                 border: "none",
               }}
+              key={project.id}
             >
               <Card variant="outlined">
                 <CardContent>

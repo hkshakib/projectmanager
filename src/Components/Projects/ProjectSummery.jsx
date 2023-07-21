@@ -5,8 +5,17 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-const ProjectSummery = ({ value }) => {
+import { useDispatch } from "react-redux";
+import { DeleteProject } from "../../Store/Reducers/ProjectReducer";
+const ProjectSummery = ({ value, id }) => {
   const createdAt = new Date(value.project.createTime).toLocaleString();
+  console.log(id);
+
+  const dispatch = useDispatch();
+  const handleDelete = (id) => {
+    dispatch(DeleteProject(id));
+    console.log("Projects Deleted!", id);
+  };
 
   return (
     <Box
@@ -15,7 +24,7 @@ const ProjectSummery = ({ value }) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "start",
-        width: 900,
+        width: 700,
         mb: 1.5,
       }}
     >
@@ -43,6 +52,9 @@ const ProjectSummery = ({ value }) => {
         </CardContent>
         <CardActions>
           <Button size="small">More</Button>
+          <Button size="small" color="error" onClick={() => handleDelete(id)} >
+            Delete
+          </Button>
         </CardActions>
       </Card>
     </Box>
