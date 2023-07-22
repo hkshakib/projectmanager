@@ -72,9 +72,6 @@ const Notifications = () => {
 
   return (
     <>
-      <Typography variant="h3" component="span">
-        Notifications
-      </Typography>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}

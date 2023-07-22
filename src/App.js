@@ -12,6 +12,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { saveUser } from "./Store/Reducers/AuthReducer";
 import { getFirestore } from "firebase/firestore";
 import { useDispatch } from "react-redux";
+import Layout from "./Components/Layout/Layout";
 
 const app = initializeApp(firebaseConfig);
 export const DataBase = getFirestore(app); 
@@ -33,13 +34,14 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Navbar/>
+      {/* <Navbar/> */}
       <Routes>
         <Route path="/" Component={Dashboard}/>
         <Route path="/project/:id" Component={ProjectDetails}/>
         <Route path="/signin" Component={SignIn}/>
         <Route path="/signup" Component={SignUp}/>
         <Route path="/create" Component={CreateProject}/>
+        <Route path="/layout" Component={Layout}/>
       </Routes>
     </BrowserRouter>
   );
