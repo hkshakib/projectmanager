@@ -12,12 +12,20 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { getAuth, signOut } from "firebase/auth";
 import { useSelector } from "react-redux";
+import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
+import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
+import HowToRegOutlinedIcon from "@mui/icons-material/HowToRegOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import { Avatar } from "@mui/material";
 
 const settings = ["Logout"];
 
 const Navbar = () => {
   const user = useSelector((state) => state.auth.value);
+
   const auth = getAuth();
+  let userAvatar = auth.currentUser?.email[0] + auth.currentUser?.email[1];
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -37,7 +45,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "white" }}>
+    <AppBar position="static" sx={{ backgroundColor: "white", boxShadow: 1 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -49,13 +57,13 @@ const Navbar = () => {
               mr: 2,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
+              fontWeight: 500,
+              // letterSpacing: ".3rem",
               color: "black",
               textDecoration: "none",
             }}
           >
-            Project Manager
+            <ManageAccountsOutlinedIcon />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -96,20 +104,30 @@ const Navbar = () => {
                     <>
                       <Button
                         href="/signup"
-                        variant="outlined"
+                        variant="text"
                         sx={{ color: "black" }}
+                        startIcon={<HowToRegOutlinedIcon />}
                       >
                         Signup
                       </Button>
                       <Button
                         href="/signin"
-                        variant="outlined"
+                        variant="text"
                         sx={{ color: "black" }}
+                        startIcon={<LoginOutlinedIcon />}
                       >
                         Signin
                       </Button>
                     </>
                   )}
+                  <Button
+                    href="/create"
+                    variant="outlined"
+                    sx={{ color: "black" }}
+                    startIcon={<AddOutlinedIcon />}
+                  >
+                    Create Project
+                  </Button>
                   {user && (
                     <Button
                       onClick={() => {
@@ -121,19 +139,13 @@ const Navbar = () => {
                             console.log("error", error);
                           });
                       }}
-                      variant="outlined"
+                      variant="text"
                       sx={{ color: "black" }}
+                      startIcon={<LogoutOutlinedIcon />}
                     >
                       logout
                     </Button>
                   )}
-                  <Button
-                    href="/create"
-                    variant="outlined"
-                    sx={{ color: "black" }}
-                  >
-                    Create Project
-                  </Button>
                 </Typography>
               </MenuItem>
             </Menu>
@@ -150,12 +162,12 @@ const Navbar = () => {
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              // letterSpacing: ".3rem",
               color: "black",
               textDecoration: "none",
             }}
           >
-            Project Manager
+            <ManageAccountsOutlinedIcon />
           </Typography>
 
           <Box
@@ -175,38 +187,28 @@ const Navbar = () => {
               <>
                 <Button
                   href="/signup"
-                  variant="outlined"
+                  variant="text"
                   sx={{ color: "black" }}
+                  startIcon={<HowToRegOutlinedIcon />}
                 >
                   Signup
                 </Button>
                 <Button
                   href="/signin"
-                  variant="outlined"
+                  variant="text"
                   sx={{ color: "black" }}
+                  startIcon={<LoginOutlinedIcon />}
                 >
                   Signin
                 </Button>
               </>
             )}
-            {user && (
-              <Button
-                onClick={() => {
-                  signOut(auth)
-                    .then(() => {
-                      console.log("user signed out");
-                    })
-                    .catch((error) => {
-                      console.log("error", error);
-                    });
-                }}
-                variant="outlined"
-                sx={{ color: "black" }}
-              >
-                logout
-              </Button>
-            )}
-            <Button href="/create" variant="outlined" sx={{ color: "black" }}>
+            <Button
+              href="/create"
+              variant="text"
+              sx={{ color: "black" }}
+              startIcon={<AddOutlinedIcon />}
+            >
               Create Project
             </Button>
           </Box>
@@ -214,11 +216,17 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
-                <Typography variant="overline" display="block" gutterBottom>
+                <Typography
+                  variant="overline"
+                  display="block"
+                  gutterBottom
+                  sx={{ marginRight: 2, marginTop: 1 }}
+                >
                   {user && auth.currentUser.email}
                 </Typography>
-                <Typography></Typography>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg">
+                  {userAvatar}
+                </Avatar>
               </IconButton>
             </Tooltip>
 
@@ -240,7 +248,26 @@ const Navbar = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center">
+                    {user && (
+                      <Button
+                        onClick={() => {
+                          signOut(auth)
+                            .then(() => {
+                              console.log("user signed out");
+                            })
+                            .catch((error) => {
+                              console.log("error", error);
+                            });
+                        }}
+                        variant="text"
+                        sx={{ color: "black" }}
+                        startIcon={<LogoutOutlinedIcon />}
+                      >
+                        Logout
+                      </Button>
+                    )}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
