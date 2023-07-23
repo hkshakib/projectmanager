@@ -1,19 +1,21 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+
 import { useDispatch } from "react-redux";
 import {
   DeleteProject,
   DeletedProject,
 } from "../../Store/Reducers/ProjectReducer";
 
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-// import Typography from "@mui/material/Typography";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  Button,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const ProjectSummery = ({ value, id }) => {
@@ -27,7 +29,6 @@ const ProjectSummery = ({ value, id }) => {
       deletedTime: new Date().toISOString(),
     };
     dispatch(DeleteProject(id));
-    console.log("Projects Deleted!", id);
     dispatch(DeletedProject(project));
   };
 

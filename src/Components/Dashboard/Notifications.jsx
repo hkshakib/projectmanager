@@ -1,7 +1,24 @@
-import { Box, Card, CardContent, Typography, Tabs, Tab } from "@mui/material";
-import PropTypes from "prop-types";
 import React, { useState } from "react";
+
 import { useSelector } from "react-redux";
+
+import PropTypes from "prop-types";
+
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  Tabs,
+  Tab,
+  Divider,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+} from "@mui/material";
+
+import ImageIcon from "@mui/icons-material/Image";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -72,7 +89,7 @@ const Notifications = () => {
 
   return (
     <>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider", boxShadow: 0 }}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -100,24 +117,31 @@ const Notifications = () => {
                 }}
                 key={project.id}
               >
-                <Card variant="outlined">
-                  <CardContent>
-                    <Typography
-                      variant="h4"
-                      component="div"
-                      sx={{ display: "flex", justifyContent: "start" }}
-                    >
-                      {project.project.title}
-                    </Typography>
-                    <Typography
-                      color="text.secondary"
-                      sx={{ mb: 1.5, display: "flex", justifyContent: "start" }}
-                    >
-                      Posted By {project.project.email} at{" "}
-                      {getTimeDifference(project.project.createTime)}
-                    </Typography>
-                  </CardContent>
-                </Card>
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <ImageIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={
+                      <Typography sx={{ fontSize: 18, fontWeight: 500 }}>
+                        {project.project.title}
+                      </Typography>
+                    }
+                    secondary={
+                      <Typography sx={{ fontSize: 14 }}>
+                        Created on{" "}
+                        {getTimeDifference(project.project.createTime)}
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+                <Divider
+                  variant="inset"
+                  component="li"
+                  sx={{ listStyle: "none" }}
+                />
               </Box>
             );
           })}

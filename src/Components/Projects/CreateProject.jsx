@@ -1,14 +1,13 @@
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import React, { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import { useState } from "react";
 import { AddProject } from "../../Store/Reducers/ProjectReducer";
+
 import { getAuth } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+
+import { Button, TextField, Box, Typography, Container } from "@mui/material";
 
 const CreateProject = () => {
   const dispatch = useDispatch();
@@ -90,4 +89,3 @@ const CreateProject = () => {
 };
 
 export default CreateProject;
-
