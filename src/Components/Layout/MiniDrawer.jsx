@@ -13,6 +13,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import { useSelector } from "react-redux";
+import { getAuth, signOut } from "firebase/auth";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 const drawerWidth = 200;
 
@@ -64,7 +67,10 @@ const Drawer = styled(MuiDrawer, {
 
 export default function MiniDrawer() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
+  const user = useSelector((state) => state.auth.value);
+
+  const auth = getAuth();
 
   const handleDrawer = () => {
     setOpen(!open);
@@ -82,7 +88,6 @@ export default function MiniDrawer() {
             )}
           </IconButton>
         </DrawerHeader>
-        <Divider />
         <List>
           {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
@@ -131,6 +136,44 @@ export default function MiniDrawer() {
               </ListItemButton>
             </ListItem>
           ))}
+        </List>
+        <Divider />
+        <List>
+          {user &&
+            ["Logout"].map((text, index) => (
+              <ListItem key={text} disablePadding sx={{ display: "block" }}>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                  }}
+                  onClick={() => {
+                    signOut(auth)
+                      .then(() => {
+                        console.log("user signed out");
+                      })
+                      .catch((error) => {
+                        console.log("error", error);
+                      });
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <LogoutOutlinedIcon sx={{ color: "orange" }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={text}
+                    sx={{ opacity: open ? 1 : 0, color: "orange" }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
         </List>
       </Drawer>
     </Box>

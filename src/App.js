@@ -19,6 +19,18 @@ import Navbar from "./Components/Layout/Navbar";
 import SignIn from "./Components/Auth/SignIn";
 import SignUp from "./Components/Auth/SignUp";
 
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
+
+const themeLight = createTheme({
+  palette: {
+    background: {
+      default: "#f2f4f8"
+    }
+  }
+});
+
+
 const app = initializeApp(firebaseConfig);
 export const DataBase = getFirestore(app); 
 const App = () => {
@@ -38,6 +50,8 @@ const App = () => {
   
 
   return (
+    <ThemeProvider theme={themeLight}>
+    <CssBaseline />
     <BrowserRouter>
       <Navbar/>
       <Routes>
@@ -50,6 +64,7 @@ const App = () => {
         <Route path="/layout" Component={Layout}/>
       </Routes>
     </BrowserRouter>
+    </ThemeProvider>
   );
 };
 
