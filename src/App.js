@@ -13,6 +13,7 @@ import { saveUser } from "./Store/Reducers/AuthReducer";
 import { getFirestore } from "firebase/firestore";
 import { useDispatch } from "react-redux";
 import Layout from "./Components/Layout/Layout";
+import MiniDrawer from "./Components/Layout/MiniDrawer";
 
 const app = initializeApp(firebaseConfig);
 export const DataBase = getFirestore(app); 
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/signin" Component={SignIn}/>
         <Route path="/signup" Component={SignUp}/>
         <Route path="/create" Component={CreateProject}/>
+        <Route path="/drawer" Component={MiniDrawer}/>
         <Route path="/layout" Component={Layout}/>
       </Routes>
     </BrowserRouter>

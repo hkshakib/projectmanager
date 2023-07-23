@@ -11,6 +11,8 @@ import Notifications from "../Dashboard/Notifications";
 import { getAuth, signOut } from "firebase/auth";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
+import MiniDrawer from "./MiniDrawer";
+
 const Layout = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.value);
@@ -21,12 +23,13 @@ const Layout = () => {
   }, [dispatch]);
 
   return (
-    <Box sx={{ height: "100vh", bgcolor: "#f0f0f0" }}>
+    <Box>
       <Navbar />
       <Container maxWidth="xxl">
         <Grid container spacing={2} sx={{ pt: 4 }}>
-          <Grid item xs={12} md={3}>
-            <Paper sx={{ p: 2 }}>
+          {/* <Grid item xs={12} md={3}> */}
+          <MiniDrawer />
+          {/* <Paper sx={{ p: 2 }}>
               <Typography variant="h6" gutterBottom>
                 {user && (
                   <Button
@@ -47,15 +50,20 @@ const Layout = () => {
                   </Button>
                 )}
               </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} md={5}>
-            <Paper sx={{ p: 2 }}>
+            </Paper> */}
+          {/* </Grid> */}
+          
+          <Grid item xs={12} md={4}>
+            {/* <Paper sx={{ p: 2, boxShadow: 0 }}> */}
               <Typography variant="h6" gutterBottom>
                 Recents Projects
               </Typography>
               <ProjectList />
-            </Paper>
+            {/* </Paper> */}
+          </Grid>
+
+          <Grid item xs={12} md={2}>
+            
           </Grid>
 
           <Grid item xs={12} md={4}>
