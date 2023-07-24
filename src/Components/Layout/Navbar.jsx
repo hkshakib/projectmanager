@@ -16,6 +16,7 @@ import {
   Button,
   Tooltip,
   MenuItem,
+  Chip,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -219,22 +220,27 @@ const Navbar = () => {
             </Button>
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Typography
-                  variant="overline"
-                  display="block"
-                  gutterBottom
-                  sx={{ marginRight: 2, marginTop: 1 }}
-                >
-                  {user && auth.currentUser.email}
-                </Typography>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg">
-                  {userAvatar}
-                </Avatar>
-              </IconButton>
-            </Tooltip>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            {user && (
+              <Tooltip title="Open settings">
+                <Chip
+                  label={user && auth.currentUser.email}
+                  variant="outlined"
+                  onClick={handleOpenUserMenu}
+                  sx={{
+                    p: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "end",
+                  }}
+                  avatar={
+                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg">
+                      {userAvatar}
+                    </Avatar>
+                  }
+                />
+              </Tooltip>
+            )}
 
             <Menu
               sx={{ mt: "45px" }}
