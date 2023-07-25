@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getAuth, signOut } from "firebase/auth";
 
@@ -25,11 +25,24 @@ import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import HowToRegOutlinedIcon from "@mui/icons-material/HowToRegOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import { fetchUserDataByUID } from "../../Store/Reducers/AuthReducer";
 
 const settings = ["Logout"];
 
 const Navbar = () => {
   const user = useSelector((state) => state.auth.value);
+  const UserId = useSelector((state) => state.auth.user.uid);
+  const firstName = useSelector((state) => state.auth.user.firstName);
+  const lastName = useSelector((state) => state.auth.user.lastName);
+  const UserName = lastName;
+
+  console.log("fullName: ", firstName + " " + lastName);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUserDataByUID(UserId));
+  }, [dispatch, UserId]);
 
   const auth = getAuth();
   let userAvatar = auth.currentUser?.email[0] + auth.currentUser?.email[1];
@@ -224,7 +237,7 @@ const Navbar = () => {
             {user && (
               <Tooltip title="Open settings">
                 <Chip
-                  label={user && auth.currentUser.email}
+                  label={user && UserName}
                   variant="outlined"
                   onClick={handleOpenUserMenu}
                   sx={{

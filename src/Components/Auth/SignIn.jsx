@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
 
 import {
   Button,
@@ -15,6 +16,7 @@ import {
   Typography,
   Container,
 } from "@mui/material";
+import { fetchUserData } from "../../Store/Reducers/AuthReducer";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -27,13 +29,17 @@ const SignIn = () => {
     handleSignIn();
   };
 
+  const dispatch = useDispatch();
+
   const auth = getAuth();
   const handleSignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        dispatch(fetchUserData(user.uid));
+        localStorage.setItem("user", JSON.stringify(user));
         navigate("/");
-        console.log("Singed in user: ", user);
+        console.log("Singed in user: ", user.uid);
       })
       .catch((error) => {
         const errorCode = error.code;
