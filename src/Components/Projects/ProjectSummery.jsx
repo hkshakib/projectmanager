@@ -18,7 +18,6 @@ import {
   Box,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-// import CollapseMoreIcon from "@mui/icons-material/CollapseMore";
 
 const style = {
   position: "absolute",
@@ -56,7 +55,6 @@ const ProjectSummery = ({ value, id }) => {
       <Accordion sx={{ margin: 1 }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
-          // collapseIcon={<CollapseMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
@@ -75,7 +73,9 @@ const ProjectSummery = ({ value, id }) => {
               <Typography variant="body2">{content}</Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">More</Button>
+              <Button size="small" href={`/projects/${id}`}>
+                More
+              </Button>
               <Button size="small" color="error" onClick={handleOpen}>
                 Delete
               </Button>

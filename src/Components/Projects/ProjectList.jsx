@@ -8,6 +8,7 @@ import ProjectSummery from "./ProjectSummery";
 
 const ProjectList = () => {
   const data = useSelector((state) => state.projects.projects);
+
   return (
     <Box sx={{ boxShadow: 0 }}>
       {data.map((da) => {

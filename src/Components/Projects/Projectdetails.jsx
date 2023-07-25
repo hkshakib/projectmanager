@@ -1,42 +1,15 @@
-import * as React from "react";
-
+import React from "react";
 import { Box, Card, CardContent, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
 
-const card = (
-  <>
-    <CardContent>
-      <Typography
-        variant="h4"
-        component="div"
-        sx={{ display: "flex", justifyContent: "start" }}
-      >
-        First Project
-      </Typography>
-      <Typography
-        color="text.secondary"
-        sx={{ mb: 1.5, display: "flex", justifyContent: "start" }}
-      >
-        Posted By HkShakib
-      </Typography>
-      <Typography
-        variant="body2"
-        sx={{ display: "flex", justifyContent: "start" }}
-      >
-        17th July 2023, 12.31 AM
-      </Typography>
-
-      <Typography
-        variant="body2"
-        sx={{ display: "flex", justifyContent: "start" }}
-      >
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis,
-        autem.
-      </Typography>
-    </CardContent>
-  </>
-);
+import { useParams } from "react-router-dom";
 
 const ProjectDetails = () => {
+  const projects = useSelector((state) => state.projects.projects);
+  const { id } = useParams();
+
+  const project = projects.find((p) => p.id === id);
+  console.log(project, id);
   return (
     <Box
       sx={{
@@ -44,12 +17,40 @@ const ProjectDetails = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "start",
-
         mb: 1.5,
         pt: 1.5,
       }}
     >
-      <Card variant="outlined">{card}</Card>
+      <Card variant="outlined">
+        <CardContent>
+          <Typography
+            variant="h4"
+            component="div"
+            sx={{ display: "flex", justifyContent: "start" }}
+          >
+            {project?.project.title}
+          </Typography>
+          <Typography
+            color="text.secondary"
+            sx={{ mb: 1.5, display: "flex", justifyContent: "start" }}
+          >
+            Posted By {project?.project.email}
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{ display: "flex", justifyContent: "start" }}
+          >
+            {project?.project.createTime}
+          </Typography>
+
+          <Typography
+            variant="body2"
+            sx={{ display: "flex", justifyContent: "start" }}
+          >
+            {project?.project.content}
+          </Typography>
+        </CardContent>
+      </Card>
     </Box>
   );
 };

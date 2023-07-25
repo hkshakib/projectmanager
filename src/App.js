@@ -21,6 +21,7 @@ import SignUp from "./Components/Auth/SignUp";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
+import { FetchDeletedProjects, FetchProjects } from "./Store/Reducers/ProjectReducer";
 
 const themeLight = createTheme({
   palette: {
@@ -47,6 +48,11 @@ const App = () => {
     });
   }, [auth, dispatch]);
 
+  useEffect(() => {
+    dispatch(FetchProjects());
+    dispatch(FetchDeletedProjects());
+  }, [dispatch]);
+
   
 
   return (
@@ -62,6 +68,7 @@ const App = () => {
         <Route path="/create" Component={CreateProject}/>
         <Route path="/drawer" Component={MiniDrawer}/>
         <Route path="/layout" Component={Layout}/>
+        <Route path="/projects/:id" Component={ProjectDetails}/>
       </Routes>
     </BrowserRouter>
     </ThemeProvider>

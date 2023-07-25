@@ -28,6 +28,9 @@ const SignIn = () => {
     event.preventDefault();
     handleSignIn();
   };
+  const handleRemember = (event) => {
+    event.preventDefault();
+  };
 
   const dispatch = useDispatch();
 
@@ -39,13 +42,8 @@ const SignIn = () => {
         dispatch(fetchUserData(user.uid));
         localStorage.setItem("user", JSON.stringify(user));
         navigate("/");
-        console.log("Singed in user: ", user.uid);
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log("An error occured: ", errorCode, errorMessage);
-      });
+      .catch((error) => {});
   };
 
   return (
@@ -85,7 +83,13 @@ const SignIn = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={
+              <Checkbox
+                onClick={handleRemember}
+                value="remember"
+                color="primary"
+              />
+            }
             label="Remember me"
           />
           <Button
@@ -103,7 +107,7 @@ const SignIn = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

@@ -62,30 +62,20 @@ const SignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log("Registered user: ", user);
         const userDocRef = doc(firestore, "users", user.uid);
         setDoc(userDocRef, {
           email: user.email,
           firstName: firstName,
           lastName: lastName,
         })
-          .then(() => {
-            console.log("User's first and last names stored in Firestore!");
-          })
-          .catch((error) => {
-            console.log("Error storing user's first and last names: ", error);
-          });
+          .then(() => {})
+          .catch((error) => {});
         setEmail("");
         setPassword("");
         navigate("/signin");
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log("Error ocured: ", errorCode, errorMessage);
-      });
+      .catch((error) => {});
   };
-  // console.log({email: email, password:password, firstName: firstName, lastName:lastName});
 
   return (
     <ThemeProvider theme={theme}>

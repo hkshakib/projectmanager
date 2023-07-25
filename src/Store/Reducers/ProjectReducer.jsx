@@ -64,7 +64,6 @@ export const FetchDeletedProjects = createAsyncThunk(
   }
 );
 
-// Create A ReCycle Bin of Projects for uptodate into Notifications
 export const DeletedProject = createAsyncThunk(
   "projects/deletedprojects",
   async (project) => {

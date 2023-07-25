@@ -1,10 +1,4 @@
-import React, { useEffect } from "react";
-
-import {
-  FetchDeletedProjects,
-  FetchProjects,
-} from "../../Store/Reducers/ProjectReducer";
-import { useDispatch } from "react-redux";
+import React from "react";
 
 import {
   Container,
@@ -20,13 +14,6 @@ import ProjectList from "../Projects/ProjectList";
 import MiniDrawer from "../Layout/MiniDrawer";
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(FetchProjects());
-    dispatch(FetchDeletedProjects());
-  }, [dispatch]);
-
   return (
     <Box>
       <Container maxWidth="xxl">
