@@ -59,8 +59,13 @@ const getTimeDifference = (time) => {
   const seconds = Math.floor(timeDiffInMilliseconds / 1000);
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
 
-  if (hours > 0) {
+  if (days > 0) {
+    return `${days} day${days === 1 ? "" : "s"} and ${hours % 24} hour${
+      hours % 24 === 1 ? "" : "s"
+    } ago`;
+  } else if (hours > 0) {
     return `${hours} hour${hours === 1 ? "" : "s"} ago`;
   } else if (minutes > 0) {
     return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
@@ -72,20 +77,34 @@ const getTimeDifference = (time) => {
 const Notifications = () => {
   const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (e, newValue) => {
+    e.preventDefault();
     setValue(newValue);
   };
 
   const data = useSelector((state) => state.projects.projects);
   const deletedData = useSelector((state) => state.projects.deletedprojects);
-  console.log({ deletedData: deletedData });
   const len = data.length;
-  const Projects = len > 0 ? data : null;
-  console.log({ Projects: Projects });
+  const Projects =
+    len > 0
+      ? data
+          .slice()
+          .sort(
+            (a, b) =>
+              new Date(b.project.createTime) - new Date(a.project.createTime)
+          )
+      : null;
 
   const deletedLen = deletedData.length;
-  const deletedProjects = deletedLen > 0 ? deletedData : null;
-  console.log({ deletedProjects: deletedProjects });
+  const deletedProjects =
+    deletedLen > 0
+      ? deletedData
+          .slice()
+          .sort(
+            (a, b) =>
+              new Date(b.project.deletedTime) - new Date(a.project.deletedTime)
+          )
+      : null;
 
   return (
     <>
@@ -165,24 +184,31 @@ const Notifications = () => {
                 }}
                 key={project.id}
               >
-                <Card variant="outlined">
-                  <CardContent>
-                    <Typography
-                      variant="h4"
-                      component="div"
-                      sx={{ display: "flex", justifyContent: "start" }}
-                    >
-                      {project.project.title}
-                    </Typography>
-                    <Typography
-                      color="text.secondary"
-                      sx={{ mb: 1.5, display: "flex", justifyContent: "start" }}
-                    >
-                      Posted By {project.project.email} at{" "}
-                      {getTimeDifference(project.project.createTime)}
-                    </Typography>
-                  </CardContent>
-                </Card>
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <ImageIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={
+                      <Typography sx={{ fontSize: 18, fontWeight: 500 }}>
+                        {project.project.project.title}
+                      </Typography>
+                    }
+                    secondary={
+                      <Typography sx={{ fontSize: 14 }}>
+                        Deleted on{" "}
+                        {getTimeDifference(project.project.deletedTime)}
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+                <Divider
+                  variant="inset"
+                  component="li"
+                  sx={{ listStyle: "none" }}
+                />
               </Box>
             );
           })}

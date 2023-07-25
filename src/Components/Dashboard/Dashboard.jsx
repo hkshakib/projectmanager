@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 
-import { FetchProjects } from "../../Store/Reducers/ProjectReducer";
+import {
+  FetchDeletedProjects,
+  FetchProjects,
+} from "../../Store/Reducers/ProjectReducer";
 import { useDispatch } from "react-redux";
 
 import {
@@ -21,6 +24,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(FetchProjects());
+    dispatch(FetchDeletedProjects());
   }, [dispatch]);
 
   return (

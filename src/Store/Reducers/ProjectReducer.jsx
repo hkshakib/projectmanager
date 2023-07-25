@@ -52,6 +52,18 @@ export const DeleteProject = createAsyncThunk(
   }
 );
 
+export const FetchDeletedProjects = createAsyncThunk(
+  "projects/fetchdeletedprojects",
+  async () => {
+    const querySnap = await getDocs(collection(DataBase, "deletedprojects"));
+    const projects = querySnap.docs.map((doc) => ({
+      id: doc.id,
+      project: doc.data(),
+    }));
+    return projects;
+  }
+);
+
 // Create A ReCycle Bin of Projects for uptodate into Notifications
 export const DeletedProject = createAsyncThunk(
   "projects/deletedprojects",
@@ -84,6 +96,9 @@ const ProjectSlice = createSlice({
       })
       .addCase(DeletedProject.fulfilled, (state, action) => {
         state.deletedprojects.push(action.payload);
+      })
+      .addCase(FetchDeletedProjects.fulfilled, (state, action) => {
+        state.deletedprojects = action.payload;
       });
   },
 });
