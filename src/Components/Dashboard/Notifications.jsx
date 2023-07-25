@@ -6,8 +6,6 @@ import PropTypes from "prop-types";
 
 import {
   Box,
-  Card,
-  CardContent,
   Typography,
   Tabs,
   Tab,
