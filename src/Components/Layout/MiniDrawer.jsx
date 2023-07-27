@@ -11,11 +11,18 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import GridViewIcon from "@mui/icons-material/GridView";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import DonutSmallOutlinedIcon from "@mui/icons-material/DonutSmallOutlined";
+import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined";
+import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
 import { useSelector } from "react-redux";
 import { getAuth, signOut } from "firebase/auth";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+
+import DrawerUi from "../Utilities/DrawerUi";
+import { Typography } from "@mui/material";
 
 const drawerWidth = 200;
 
@@ -88,54 +95,80 @@ export default function MiniDrawer() {
             )}
           </IconButton>
         </DrawerHeader>
+        <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          <DrawerUi
+            menuName="Dashboard"
+            url="/"
+            Icon={<GridViewIcon />}
+            open={open}
+          />
+          <DrawerUi
+            menuName="Create Project"
+            url="create"
+            Icon={<AddCircleOutlineIcon />}
+            open={open}
+          />
+          <DrawerUi
+            menuName="Profile"
+            url="profile"
+            Icon={<PersonOutlineIcon />}
+            open={open}
+          />
+          <DrawerUi
+            menuName="Progress"
+            url="progress"
+            Icon={<DonutSmallOutlinedIcon />}
+            open={open}
+          />
+          <DrawerUi
+            menuName="Your Project"
+            url="own-project"
+            Icon={<AccountTreeOutlinedIcon />}
+            open={open}
+          />
         </List>
         <Divider />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          {open && (
+            <>
+              <Typography sx={{ textAlign: "center", fontSize: 14, mb: 1 }}>
+                Reports and Update
+              </Typography>
+              <Divider />
+            </>
+          )}
+          <DrawerUi
+            menuName="This Month"
+            url=""
+            Icon={<SummarizeOutlinedIcon />}
+            open={open}
+          />
+          <DrawerUi
+            menuName="Last 3 Months"
+            url=""
+            Icon={<SummarizeOutlinedIcon />}
+            open={open}
+          />
+
+          <DrawerUi
+            menuName="Last 6 Months"
+            url=""
+            Icon={<SummarizeOutlinedIcon />}
+            open={open}
+          />
+          <DrawerUi
+            menuName="Last 12 Months"
+            url=""
+            Icon={<SummarizeOutlinedIcon />}
+            open={open}
+          />
+          <DrawerUi
+            menuName="Last 24 Months"
+            url=""
+            Icon={<SummarizeOutlinedIcon />}
+            open={open}
+          />
         </List>
         <Divider />
         <List>
@@ -165,12 +198,9 @@ export default function MiniDrawer() {
                       justifyContent: "center",
                     }}
                   >
-                    <LogoutOutlinedIcon sx={{ color: "orange" }} />
+                    <LogoutOutlinedIcon />
                   </ListItemIcon>
-                  <ListItemText
-                    primary={text}
-                    sx={{ opacity: open ? 1 : 0, color: "orange" }}
-                  />
+                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
               </ListItem>
             ))}

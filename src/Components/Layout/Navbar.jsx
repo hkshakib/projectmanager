@@ -68,7 +68,7 @@ const Navbar = () => {
     <AppBar position="static" sx={{ backgroundColor: "white", boxShadow: 1 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
+          {/* <Typography
             variant="h6"
             noWrap
             component="a"
@@ -84,7 +84,7 @@ const Navbar = () => {
             }}
           >
             <ManageAccountsOutlinedIcon />
-          </Typography>
+          </Typography> */}
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -171,7 +171,7 @@ const Navbar = () => {
             </Menu>
           </Box>
 
-          <Typography
+          {/* <Typography
             variant="h5"
             noWrap
             component="a"
@@ -188,7 +188,7 @@ const Navbar = () => {
             }}
           >
             <ManageAccountsOutlinedIcon />
-          </Typography>
+          </Typography> */}
 
           <Box
             sx={{
@@ -223,14 +223,14 @@ const Navbar = () => {
                 </Button>
               </>
             )}
-            <Button
+            {/* <Button
               href="/create"
               variant="text"
               sx={{ color: "black" }}
               startIcon={<AddOutlinedIcon />}
             >
               Create Project
-            </Button>
+            </Button> */}
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
