@@ -191,6 +191,7 @@ const Notifications = () => {
           onChange={handlePageChange}
           variant="outlined"
           shape="rounded"
+          sx={{ mt: 4 }}
         />
       </CustomTabPanel>
 
@@ -246,6 +247,7 @@ const Notifications = () => {
           onChange={handleDeletedPageChange}
           variant="outlined"
           shape="rounded"
+          sx={{ mt: 4 }}
         />
       </CustomTabPanel>
     </>

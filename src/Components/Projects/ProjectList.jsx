@@ -38,6 +38,7 @@ const ProjectList = () => {
         onChange={handlePageChange}
         variant="outlined"
         shape="rounded"
+        sx={{mt: 4}}
       />
     </Box>
   );
