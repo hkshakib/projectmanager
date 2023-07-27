@@ -1,28 +1,38 @@
 import * as React from "react";
+
+import { useLocation } from "react-router-dom";
+
 import { styled, useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import MuiDrawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItem from "@mui/material/ListItem";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import GridViewIcon from "@mui/icons-material/GridView";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import DonutSmallOutlinedIcon from "@mui/icons-material/DonutSmallOutlined";
+import IconButton from "@mui/material/IconButton";
+import ListItem from "@mui/material/ListItem";
+import MuiDrawer from "@mui/material/Drawer";
+import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import Box from "@mui/material/Box";
+
+import AssignmentTurnedInOutlinedIcon from "@mui/icons-material/AssignmentTurnedInOutlined";
 import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined";
+import PlaylistAddOutlinedIcon from "@mui/icons-material/PlaylistAddOutlined";
+import DonutSmallOutlinedIcon from "@mui/icons-material/DonutSmallOutlined";
 import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
+import CalculateOutlinedIcon from "@mui/icons-material/CalculateOutlined";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import RssFeedOutlinedIcon from "@mui/icons-material/RssFeedOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import BookOutlinedIcon from "@mui/icons-material/BookOutlined";
+import GridViewIcon from "@mui/icons-material/GridView";
+
 import { useSelector } from "react-redux";
 import { getAuth, signOut } from "firebase/auth";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 import DrawerUi from "../Utilities/DrawerUi";
-import { Typography } from "@mui/material";
 
 const drawerWidth = 200;
 
@@ -77,6 +87,8 @@ export default function MiniDrawer() {
   const [open, setOpen] = React.useState(true);
   const user = useSelector((state) => state.auth.value);
 
+  const location = useLocation();
+
   const auth = getAuth();
 
   const handleDrawer = () => {
@@ -102,12 +114,14 @@ export default function MiniDrawer() {
             url="/"
             Icon={<GridViewIcon />}
             open={open}
+            active={location.pathname === "/"}
           />
           <DrawerUi
             menuName="Create Project"
             url="create"
             Icon={<AddCircleOutlineIcon />}
             open={open}
+            active={location.pathname === "/create"}
           />
           <DrawerUi
             menuName="Profile"
@@ -130,14 +144,41 @@ export default function MiniDrawer() {
         </List>
         <Divider />
         <List>
-          {open && (
-            <>
-              <Typography sx={{ textAlign: "center", fontSize: 14, mb: 1 }}>
-                Reports and Update
-              </Typography>
-              <Divider />
-            </>
-          )}
+          <DrawerUi
+            menuName="To Do"
+            url="todo"
+            Icon={<PlaylistAddOutlinedIcon />}
+            open={open}
+          />
+          <DrawerUi
+            menuName="Calculator"
+            url="calculator"
+            Icon={<CalculateOutlinedIcon />}
+            open={open}
+          />
+
+          <DrawerUi
+            menuName="Tutorials"
+            url="tutorials"
+            Icon={<AssignmentTurnedInOutlinedIcon />}
+            open={open}
+          />
+          <DrawerUi
+            menuName="Blog"
+            url="blog"
+            Icon={<RssFeedOutlinedIcon />}
+            open={open}
+          />
+          <DrawerUi
+            menuName="Bookmarks"
+            url="bookmarks"
+            Icon={<BookOutlinedIcon />}
+            open={open}
+          />
+        </List>
+
+        <Divider />
+        <List>
           <DrawerUi
             menuName="This Month"
             url=""
@@ -205,6 +246,7 @@ export default function MiniDrawer() {
               </ListItem>
             ))}
         </List>
+        <Divider />
       </Drawer>
     </Box>
   );
