@@ -11,25 +11,23 @@ import {
 
 import Notifications from "../Dashboard/Notifications";
 import ProjectList from "../Projects/ProjectList";
-import MiniDrawer from "../Layout/MiniDrawer";
 
 const Dashboard = () => {
   return (
     <Box>
-      <Container maxWidth="xxl">
+      <Container maxWidth="xl">
         <Grid container spacing={2} sx={{ pt: 4 }}>
-          <MiniDrawer />
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={5}>
             <Typography variant="h6" gutterBottom>
               Recents Projects
             </Typography>
             <ProjectList />
           </Grid>
 
-          <Grid item xs={12} md={2}></Grid>
+          <Grid item xs={12} md={1}></Grid>
           <Divider orientation="vertical" variant="middle" flexItem />
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={5}>
             <Paper sx={{ p: 2, boxShadow: 0 }}>
               <Typography variant="h6" gutterBottom>
                 Notifications

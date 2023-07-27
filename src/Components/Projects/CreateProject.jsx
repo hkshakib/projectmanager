@@ -21,7 +21,6 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import MiniDrawer from "../Layout/MiniDrawer";
 
 const CreateProject = () => {
   const dispatch = useDispatch();
@@ -58,7 +57,6 @@ const CreateProject = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <MiniDrawer />
       <Box
         sx={{
           marginTop: 8,

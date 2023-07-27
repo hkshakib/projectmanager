@@ -17,6 +17,7 @@ import SignUp from "./Components/Auth/SignUp";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import { FetchDeletedProjects, FetchProjects } from "./Store/Reducers/ProjectReducer";
+import Calculator from "./Components/Calculator/Calculator";
 
 const themeLight = createTheme({
   palette: {
@@ -56,7 +57,8 @@ const App = () => {
     <ThemeProvider theme={themeLight}>
       <CssBaseline />
       <BrowserRouter>
-        <Navbar/>
+        <Navbar />
+        <MiniDrawer />
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/project/:id" element={<ProjectDetails />} />
@@ -65,6 +67,7 @@ const App = () => {
           <Route path="/create" element={<CreateProject />} />
           <Route path="/drawer" element={<MiniDrawer />} />
           <Route path="/layout" element={<Layout />} />
+          <Route path="/calculator" element={<Calculator />} />
           <Route path="/projects/:id" element={<ProjectDetails />} />
         </Routes>
       </BrowserRouter>
