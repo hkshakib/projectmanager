@@ -20,7 +20,6 @@ import {
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
-import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import HowToRegOutlinedIcon from "@mui/icons-material/HowToRegOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";

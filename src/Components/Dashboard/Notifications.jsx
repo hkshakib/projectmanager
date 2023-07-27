@@ -14,6 +14,7 @@ import {
   ListItemText,
   ListItemAvatar,
   Avatar,
+  Pagination,
 } from "@mui/material";
 
 import ImageIcon from "@mui/icons-material/Image";
@@ -74,6 +75,8 @@ const getTimeDifference = (time) => {
 
 const Notifications = () => {
   const [value, setValue] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentDeletedPage, setCurrentDeletedPage] = useState(1);
 
   const handleChange = (e, newValue) => {
     e.preventDefault();
@@ -104,6 +107,26 @@ const Notifications = () => {
           )
       : null;
 
+  const itemsPerPage = 5;
+  const handlePageChange = (event, page) => {
+    event.preventDefault();
+    setCurrentPage(page);
+  };
+
+  const handleDeletedPageChange = (event, page) => {
+    event.preventDefault();
+    setCurrentDeletedPage(page);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentDeletedItems = deletedProjects?.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  const currentItems = Projects?.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
     <>
       <Box sx={{ borderBottom: 1, borderColor: "divider", boxShadow: 0 }}>
@@ -119,8 +142,8 @@ const Notifications = () => {
       <CustomTabPanel value={value} index={0}>
         {!Projects && <Typography>No Notification Available</Typography>}
 
-        {Projects &&
-          Projects.map((project) => {
+        {currentItems &&
+          currentItems.map((project) => {
             return (
               <Box
                 sx={{
@@ -162,13 +185,20 @@ const Notifications = () => {
               </Box>
             );
           })}
+        <Pagination
+          count={Math.ceil(Projects?.length / itemsPerPage)}
+          page={currentPage}
+          onChange={handlePageChange}
+          variant="outlined"
+          shape="rounded"
+        />
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={1}>
         {!deletedProjects && <Typography>No Notification Available</Typography>}
 
-        {deletedProjects &&
-          deletedProjects.map((project) => {
+        {currentDeletedItems &&
+          currentDeletedItems.map((project) => {
             return (
               <Box
                 sx={{
@@ -210,6 +240,13 @@ const Notifications = () => {
               </Box>
             );
           })}
+        <Pagination
+          count={Math.ceil(deletedProjects?.length / itemsPerPage)}
+          page={currentDeletedPage}
+          onChange={handleDeletedPageChange}
+          variant="outlined"
+          shape="rounded"
+        />
       </CustomTabPanel>
     </>
   );
