@@ -67,24 +67,6 @@ const Navbar = () => {
     <AppBar position="static" sx={{ backgroundColor: "white", boxShadow: 1 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 500,
-              // letterSpacing: ".3rem",
-              color: "black",
-              textDecoration: "none",
-            }}
-          >
-            <ManageAccountsOutlinedIcon />
-          </Typography> */}
-
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -169,26 +151,6 @@ const Navbar = () => {
               </MenuItem>
             </Menu>
           </Box>
-
-          {/* <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              // letterSpacing: ".3rem",
-              color: "black",
-              textDecoration: "none",
-            }}
-          >
-            <ManageAccountsOutlinedIcon />
-          </Typography> */}
-
           <Box
             sx={{
               flexGrow: 1,
@@ -222,14 +184,6 @@ const Navbar = () => {
                 </Button>
               </>
             )}
-            {/* <Button
-              href="/create"
-              variant="text"
-              sx={{ color: "black" }}
-              startIcon={<AddOutlinedIcon />}
-            >
-              Create Project
-            </Button> */}
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "center" }}>

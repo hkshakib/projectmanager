@@ -12,7 +12,7 @@ const ProjectList = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const itemsPerPage = 20;
+  const itemsPerPage = 5;
 
   const handlePageChange = (event, page) => {
     event.preventDefault();
@@ -38,7 +38,7 @@ const ProjectList = () => {
         onChange={handlePageChange}
         variant="outlined"
         shape="rounded"
-        sx={{mt: 4}}
+        sx={{ mt: 4 }}
       />
     </Box>
   );
