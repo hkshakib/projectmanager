@@ -8,6 +8,7 @@ import TaskCard from "../Utilities/TaskCard";
 import TaskUtility from "../Utilities/TaskUtility";
 import MiniCard from "../Utilities/MiniCard";
 import Calender from "../Utilities/Calender";
+import TeamMember from "../Team/TeamMember";
 
 const Dashboard = () => {
   return (
@@ -35,18 +36,21 @@ const Dashboard = () => {
 
         <Grid item xs={12} md={3}>
           <Paper sx={{ p: 2, mb: 1, boxShadow: 0 }}>
-            <Typography variant="h6" gutterBottom>
-              Notifications
+            <Typography variant="subtitle" gutterBottom>
+              Team Members
             </Typography>
-            <Notifications />
+            <TeamMember />
           </Paper>
           <Paper sx={{ p: 2, boxShadow: 0 }}>
+            <Typography variant="subtitle" gutterBottom>
+              Calender
+            </Typography>
             <Calender />
           </Paper>
         </Grid>
         <Grid item xs={12} md={3}>
           <Paper sx={{ p: 2, boxShadow: 0 }}>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="subtitle" gutterBottom>
               Notifications
             </Typography>
             <Notifications />
