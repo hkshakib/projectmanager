@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import {
   Avatar,
   Box,
+  Button,
   Divider,
   ListItem,
   ListItemAvatar,
@@ -12,6 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import ImageIcon from "@mui/icons-material/PermIdentityOutlined";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -80,6 +82,26 @@ const TeamMember = () => {
               </>
             );
           })}
+        <Button
+          startIcon={<AddCircleOutlineIcon />}
+          variant="outlined"
+          sx={{
+            color: "#000",
+            width: "100%",
+            height: "30px",
+            "&:hover": {
+              color: "black",
+            },
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "12px",
+            }}
+          >
+            Add Team Member
+          </Typography>
+        </Button>
       </Box>
     </>
   );
