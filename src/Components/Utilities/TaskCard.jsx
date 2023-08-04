@@ -9,10 +9,10 @@ import Image from "../../Media/Images/Task1.jpg";
 
 export default function TaskCard() {
   return (
-    <Card sx={{ display: "flex" }} image={Image}>
+    <Card sx={{ display: "flex", marginBottom: 4 }} image={Image}>
       <Box sx={{ display: "flex", flexGrow: 1, flexDirection: "column" }}>
         <CardContent sx={{ flex: "1 0 auto" }}>
-          <Typography component="div" variant="h5">
+          <Typography component="div" variant="h4">
             Today's Tasks
           </Typography>
           <Typography
@@ -42,7 +42,7 @@ export default function TaskCard() {
         component="img"
         sx={{ width: 151, paddingRight: 1 }}
         image={Image}
-        alt="Live from space album cover"
+        alt="Hey Image Didn't load"
       />
     </Card>
   );

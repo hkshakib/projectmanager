@@ -1,64 +1,19 @@
 import React from "react";
 
-import {
-  Container,
-  Typography,
-  Box,
-  Paper,
-  Grid,
-  Stack,
-  Button,
-} from "@mui/material";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { Container, Typography, Box, Paper, Grid } from "@mui/material";
 
 import Notifications from "../Dashboard/Notifications";
 import ProjectList from "../Projects/ProjectList";
-import { useSelector } from "react-redux";
 import TaskCard from "../Utilities/TaskCard";
+import TaskUtility from "../Utilities/TaskUtility";
 
 const Dashboard = () => {
-  const lastName = useSelector((state) => state.auth.user.lastName);
-  const UserName = lastName;
   return (
     <Box>
       <Container maxWidth="xl">
         <Grid container spacing={2} sx={{ pt: 4 }}>
           <Grid item xs={12} md={6}>
-            <Stack direction="row" spacing={30}>
-              <Typography variant="h5" gutterBottom>
-                Good Morning,{" "}
-                <span
-                  style={{
-                    color: "blue",
-                    font: "mono",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {UserName}!
-                </span>
-              </Typography>
-              <Button
-                startIcon={<AddCircleOutlineIcon />}
-                variant="outlined"
-                sx={{
-                  background: "blue",
-                  color: "#fff",
-                  width: "200px",
-                  height: "30px",
-                  "&:hover": {
-                    color: "black",
-                  },
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: "12px",
-                  }}
-                >
-                  Add a new task
-                </Typography>
-              </Button>
-            </Stack>
+            <TaskUtility />
             <TaskCard />
             <Typography variant="h6" gutterBottom>
               Recents Tasks
