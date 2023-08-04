@@ -3,43 +3,30 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Button, CardMedia } from "@mui/material";
 
 import Image from "../../Media/Images/Task1.jpg";
+import { CardMedia } from "@mui/material";
 
-export default function TaskCard() {
+export default function MiniCard({ Title, NumberOfTasks }) {
   return (
     <Card sx={{ display: "flex", marginBottom: 4 }} image={Image}>
-      <Box sx={{ display: "flex", flexGrow: 1, flexDirection: "column" }}>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
         <CardContent sx={{ flex: "1 0 auto" }}>
-          <Typography component="div" variant="h4">
-            Today's Tasks
+          <Typography component="div" variant="h6">
+            {Title}
           </Typography>
           <Typography
-            variant="subtitle1"
+            variant="subtitle3"
             color="text.secondary"
             component="div"
           >
-            Check your daily task's and Schedule
+            {NumberOfTasks}
           </Typography>
         </CardContent>
-        <Button
-          sx={{
-            margin: 1,
-            backgroundColor: "blue",
-            width: 250,
-            color: "white",
-            "&:hover": {
-              color: "black",
-            },
-          }}
-        >
-          See Today's Schedule
-        </Button>
       </Box>
       <CardMedia
         component="img"
-        sx={{ width: 151, paddingRight: 1 }}
+        sx={{ width: 60, paddingRight: 1 }}
         image={Image}
         alt="Hey Image Didn't load"
       />
