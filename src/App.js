@@ -18,6 +18,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import { FetchDeletedProjects, FetchProjects } from "./Store/Reducers/ProjectReducer";
 import Calculator from "./Components/Calculator/Calculator";
+import Todo from "./Components/Todo/Todo";
 
 const themeLight = createTheme({
   palette: {
@@ -68,6 +69,7 @@ const App = () => {
           <Route path="/drawer" element={<MiniDrawer />} />
           <Route path="/layout" element={<Layout />} />
           <Route path="/calculator" element={<Calculator />} />
+          <Route path="/todo" element={<Todo />} />
           <Route path="/projects/:id" element={<ProjectDetails />} />
         </Routes>
       </BrowserRouter>
