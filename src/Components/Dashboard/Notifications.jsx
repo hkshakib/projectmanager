@@ -107,7 +107,7 @@ const Notifications = () => {
           )
       : null;
 
-  const itemsPerPage = 5;
+  const itemsPerPage = 3;
   const handlePageChange = (event, page) => {
     event.preventDefault();
     setCurrentPage(page);
@@ -151,7 +151,7 @@ const Notifications = () => {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "start",
-                  width: 500,
+                  alignItems: "center",
                   mb: 1.5,
                   border: "none",
                 }}
@@ -165,12 +165,12 @@ const Notifications = () => {
                   </ListItemAvatar>
                   <ListItemText
                     primary={
-                      <Typography sx={{ fontSize: 18, fontWeight: 500 }}>
+                      <Typography sx={{ fontSize: 16, fontWeight: 500 }}>
                         {project.project.title}
                       </Typography>
                     }
                     secondary={
-                      <Typography sx={{ fontSize: 14 }}>
+                      <Typography sx={{ fontSize: 12 }}>
                         Created on{" "}
                         {getTimeDifference(project.project.createTime)}
                       </Typography>
@@ -207,7 +207,6 @@ const Notifications = () => {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "start",
-                  width: 500,
                   mb: 1.5,
                   border: "none",
                 }}
@@ -221,12 +220,12 @@ const Notifications = () => {
                   </ListItemAvatar>
                   <ListItemText
                     primary={
-                      <Typography sx={{ fontSize: 18, fontWeight: 500 }}>
+                      <Typography sx={{ fontSize: 16, fontWeight: 500 }}>
                         {project.project.project.title}
                       </Typography>
                     }
                     secondary={
-                      <Typography sx={{ fontSize: 14 }}>
+                      <Typography sx={{ fontSize: 12 }}>
                         Deleted on{" "}
                         {getTimeDifference(project.project.deletedTime)}
                       </Typography>
