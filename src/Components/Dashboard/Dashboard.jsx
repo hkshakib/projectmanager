@@ -14,6 +14,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import Notifications from "../Dashboard/Notifications";
 import ProjectList from "../Projects/ProjectList";
 import { useSelector } from "react-redux";
+import TaskCard from "../Utilities/TaskCard";
 
 const Dashboard = () => {
   const lastName = useSelector((state) => state.auth.user.lastName);
@@ -40,13 +41,13 @@ const Dashboard = () => {
                 startIcon={<AddCircleOutlineIcon />}
                 variant="outlined"
                 sx={{
+                  background: "blue",
+                  color: "#fff",
+                  width: "200px",
+                  height: "30px",
                   "&:hover": {
                     color: "black",
                   },
-                  background: "#A6E1ED",
-                  color: "#000",
-                  width: "200px",
-                  height: "30px",
                 }}
               >
                 <Typography
@@ -58,6 +59,7 @@ const Dashboard = () => {
                 </Typography>
               </Button>
             </Stack>
+            <TaskCard />
             <Typography variant="h6" gutterBottom>
               Recents Tasks
             </Typography>
